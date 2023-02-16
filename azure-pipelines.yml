@@ -1,6 +1,7 @@
 ---
 pool: 
  name: default
+ vmImage: ubuntu-latest
 
 trigger:
   - main
