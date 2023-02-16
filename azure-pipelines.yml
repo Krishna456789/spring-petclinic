@@ -1,0 +1,12 @@
+---
+pool: 'Azure Pipelines'
+
+trigger:
+  - main
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'package'
+      jdkVersionOption: '1.17'
