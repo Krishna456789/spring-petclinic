@@ -1,5 +1,6 @@
 ---
-pool: 'Azure Pipelines'
+pool: 
+ name: default
 
 trigger:
   - main
