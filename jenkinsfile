@@ -1,0 +1,18 @@
+pipeline {
+    agent none
+    stages('VCS') {
+        stage {
+            steps {
+                git url: 'https://github.com/Krishna456789/spring-petclinic.git',
+                branch: 'main'
+            }
+        }
+    }
+    stages('build') {
+        stage {
+            steps {
+                sh './gradlew build'
+            }
+        }
+    }
+}
