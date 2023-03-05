@@ -6,11 +6,17 @@ pipeline {
         git url: 'https://github.com/Krishna456789/spring-petclinic.git', 
         branch:  'main'
       }
-
     }
     stage('build'){
       steps {
         sh './mvnw package'
+      }
+    }
+    stage('postbuild') {
+      steps {
+        archiveArtifacts artifacts: '**/target/spring-petclinic-3.0.0-SNAPSHOT.jar',
+                                 onlyIfSuccessful: true
+                junit testResults: '**/surefire-reports/TEST-*.xml'
       }
     }
   }
