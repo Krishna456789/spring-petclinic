@@ -1,8 +1,8 @@
 pipeline {
   agent { label 'java_17'}
-  triggers { pollscm('* * * * *')}
+  triggers { pollscm ('* * * * *')}
   parameters {
-    choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'Maven Goal')git 
+    choice(name: 'MAVEN_GOAL', choices: ['package', 'install', 'clean'], description: 'Maven Goal')
   }
   stages {
     stage('vcs') {
