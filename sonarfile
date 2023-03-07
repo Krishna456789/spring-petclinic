@@ -1,0 +1,20 @@
+pipeline{
+    agent {label 'sonarqube'}
+    stages {
+        stage ('vcs'){
+            steps{
+                git url: 'https://github.com/Krishna456789/spring-petclinic.git',
+                branch: 'main'
+
+            }
+        }
+        stage('sonar analysis') {
+            steps {
+                // performing sonarqube analysis with "withSonarQubeENV(<Name of Server configured in Jenkins>)"
+                withSonarQubeEnv('sonarqube') {
+                    sh 'mvn clean package sonar:sonar -Dsonar.organization=springpetclinic1'
+                }
+            }
+        }
+    }
+}
