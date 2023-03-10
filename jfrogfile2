@@ -15,8 +15,8 @@ pipeline {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: 'https://https://chaitanyadar.jfrog.io/artifactory',
-                    credentialsId: 'JFROG_CLOUD_ADMIN'
+                    url: 'https://chaitanyadar.jfrog.io/artifactory',
+                    credentialsId: 'JFROG-TOKEN'
                 )
 
                 rtMavenDeployer (
