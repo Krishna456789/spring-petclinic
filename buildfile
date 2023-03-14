@@ -53,7 +53,7 @@ pipeline{
         }
         stage('package') {
             tools {
-                jdk 'JDK_17'
+                jdk 'jdk_17'
             }
             steps {
                 rtMavenRun (
