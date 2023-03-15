@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jfrogbuilds' }
+    agent { label 'sonarbuilds' }
     triggers { pollSCM ('* * * * *') }
     stages {
         stage('vcs') {
