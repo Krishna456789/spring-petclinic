@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'JDK_17' }
+    agent { label 'jfrogbuild' }
     triggers { pollSCM ('* * * * *') }
     stages {
         stage('vcs') {
