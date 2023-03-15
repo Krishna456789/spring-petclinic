@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'jfrogbuild' }
+    agent { label 'jfrogbuilds' }
     triggers { pollSCM ('* * * * *') }
     stages {
         stage('vcs') {
@@ -8,31 +8,27 @@ pipeline {
                     branch: 'release'
             }
         }
-        stage('build') {
-            steps {
-                sh './mvnw clean verify sonar:sonar \
-                -Dsonar.login=4e69ad62dbe102f33bb2153c5de97a352cc37409 \
-                -Dsonar.host.url=https://sonarcloud.io \
-                -Dsonar.organization=darling456123 \
-                -Dsonar.projectKey=darling456123_sonarqube'
-            }
-        }
         stage ('Artifactory configuration') {
             steps {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
-                    url: 'https://chaitanyadar.jfrog.io/artifactory',
-                    credentialsId: 'jfrog123'
+                    url: 'https://https://chaitanyadar.jfrog.io/artifactory',
+                    credentialsId: 'jfrog'
                 )
 
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "ARTIFACTORY_SERVER",
-                    releaseRepo: 'qt-libs-release-local',
-                    snapshotRepo: 'qt-libs-snapshot-local'
+                    releaseRepo: 'libs-release',
+                    snapshotRepo: 'libs-snapshot'
                 )
 
-                
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "ARTIFACTORY_SERVER",
+                    releaseRepo: 'libs-release',
+                    snapshotRepo: 'libs-snapshot'
+                )
             }
         }
         stage('package') {
@@ -52,7 +48,7 @@ pipeline {
                 )
                 //sh "mvn ${params.MAVEN_GOAL}"
             }
-        }       
+       }
         stage('post build') {
             steps {
                 archiveArtifacts artifacts: '**/target/spring-petclinic-3.0.0-SNAPSHOT.jar',
