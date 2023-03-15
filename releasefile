@@ -8,6 +8,15 @@ pipeline {
                     branch: 'release'
             }
         }
+        stage('build') {
+            steps {
+                sh './mvnw clean verify sonar:sonar \
+                -Dsonar.login=4e69ad62dbe102f33bb2153c5de97a352cc37409 \
+                -Dsonar.host.url=https://sonarcloud.io \
+                -Dsonar.organization=darling456123 \
+                -Dsonar.projectKey=darling456123_sonarqube'
+            }
+        }
         stage ('Artifactory configuration') {
             steps {
                 rtServer (
