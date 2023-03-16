@@ -16,7 +16,7 @@ pipeline {
                 rtServer (
                     id: "ARTIFACTORY_SERVER",
                     url: 'https://chaitanyadar.jfrog.io/artifactory',
-                    credentialsId: 'jfrog123'
+                    credentialsId: 'JFROG'
                 )
 
                 rtMavenDeployer (
@@ -36,7 +36,7 @@ pipeline {
         }
         stage('package') {
             tools {
-                jdk 'jdk_17'
+                jdk 'JDK-17'
             }
             steps {
                 rtMavenRun (
