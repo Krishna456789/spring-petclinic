@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'gradlebuilds' }
+    agent { label 'gradlebuild' }
     triggers { pollSCM ('* * * * *') }
     stages {
         stage('vcs') {
@@ -47,7 +47,7 @@ pipeline {
                 rtPublishBuildInfo (
                     serverId: "ARTIFACTORY_SERVER"
                 )
-                //sh "mvn ${params.MAVEN_GOAL}"
+                
             }
        }
         stage('post build') {
